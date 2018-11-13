@@ -37,6 +37,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,24 +55,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationContext.cs" />
-    <Compile Include="Domain\Customer.cs" />
-    <Compile Include="Domain\Date.cs" />
+    <Compile Include="Context\IdentityContext.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\OrderStatus.cs" />
     <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Identity\ApplicationRole.cs" />
+    <Compile Include="Identity\ApplicationRoleManager.cs" />
+    <Compile Include="Identity\ApplicationUser.cs" />
+    <Compile Include="Identity\ApplicationUserManager.cs" />
+    <Compile Include="Identity\IdentityUnitOfWork.cs" />
+    <Compile Include="Identity\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Implementation\CommonRepository.cs" />
-    <Compile Include="Repository\Implementation\CustomerRepository.cs" />
-    <Compile Include="Repository\Implementation\OrderRepository.cs" />
-    <Compile Include="Repository\Implementation\ProductRepository.cs" />
+    <Compile Include="Repository\CommonRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\Interface\IProductRepository.cs" />
     <Compile Include="Repository\Interface\IOrderRepository.cs" />
-    <Compile Include="Repository\Interface\ICustomerRepository.cs" />
+    <Compile Include="Repository\Interface\IUserRepository.cs" />
     <Compile Include="Repository\Interface\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

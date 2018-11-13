@@ -1,0 +1,50 @@
+﻿@model IndProd.Web.Models.LoginModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <title>Login</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="background-color: #f5f5f5">
+            <h4 class="text-center">Create user</h4>
+            @using (Html.BeginForm("Login", "Account"))
+            {
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Password, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Password)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.Password)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Email, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Email)
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.Email)</span>
+                </div>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-outline-success" value="Login" />
+                    <span>
+                        <input type="button" class="btn btn-outline-danger" Value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'" />
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+</body>
+</html>

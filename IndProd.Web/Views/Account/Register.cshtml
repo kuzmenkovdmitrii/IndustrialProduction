@@ -1,0 +1,85 @@
+﻿@model IndProd.Web.Models.RegisterModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="background-color: #f5f5f5">
+                <h4 class="text-center">Register user</h4>
+                @using (Html.BeginForm("Register", "Account"))
+                {
+                    <div class="form-group has-success has-feedback">
+                        @Html.TextBoxFor(x => x.UserName, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.UserName)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.UserName)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Password, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.Password)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.Password)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.ConfirmPassword, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.ConfirmPassword)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.ConfirmPassword)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Email, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.Email)
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.Email)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.FirstName, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.FirstName)
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.FirstName)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.LastName, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.LastName)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.LastName)</span>
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-outline-success" value="Register" />
+                        <span>
+                            <input type="button" class="btn btn-outline-danger" Value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'" />
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,9 +1,9 @@
 ﻿using System;
 using IndProd.DAL.Context;
 
-namespace IndProd.DAL.Repository.Implementation
+namespace IndProd.DAL.Repository
 {
-    class CommonRepository
+    public class CommonRepository
     {
         protected ApplicationContext db = new ApplicationContext();
 

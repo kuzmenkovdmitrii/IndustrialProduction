@@ -4,9 +4,9 @@ using System.Linq;
 using IndProd.DAL.Domain;
 using IndProd.DAL.Repository.Interface;
 
-namespace IndProd.DAL.Repository.Implementation
+namespace IndProd.DAL.Repository
 {
-    class OrderRepository : CommonRepository, IOrderRepository
+    public class OrderRepository : CommonRepository, IOrderRepository
     {
         public IEnumerable<Order> List()
         {

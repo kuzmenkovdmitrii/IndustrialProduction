@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IndProd.DAL.Domain;
 using IndProd.DAL.Repository.Interface;
 
-namespace IndProd.DAL.Repository.Implementation
+namespace IndProd.DAL.Repository
 {
-    class ProductRepository : CommonRepository, IProductRepository
+    public class ProductRepository : CommonRepository, IProductRepository
     {
         public IEnumerable<Product> List()
         {

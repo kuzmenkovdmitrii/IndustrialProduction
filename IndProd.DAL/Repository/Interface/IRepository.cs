@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IndProd.DAL.Repository.Interface
 {
-    interface IRepository<T> : IDisposable
+    public interface IRepository<T> : IDisposable
         where T : class
     {
         IEnumerable<T> List();
