@@ -6,11 +6,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace IndProd.DAL.Context
 {
-    public class IdentityContext : IdentityDbContext<ApplicationUser>
+    public class IdentityContext : IdentityDbContext<User>
     {
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
-        public IdentityContext() : base("IndProdDB2")
+        public IdentityContext() : base("IndProdDB3")
         {
         }
     }

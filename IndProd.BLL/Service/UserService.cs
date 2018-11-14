@@ -2,6 +2,7 @@
 using System.Data.Entity.Validation;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using AutoMapper;
 using IndProd.BLL.DTO;
 using IndProd.BLL.Infrastructure;
@@ -39,12 +40,15 @@ namespace IndProd.BLL.Service
             return null;
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
             var checkUser = await DB.UserManager.FindByEmailAsync(userDto.Email);
             if (checkUser == null)
             {
-                var user = new ApplicationUser()
+                var user = new User()
                 {
                     Email = userDto.Email,
                     UserName = userDto.UserName,
@@ -52,9 +56,20 @@ namespace IndProd.BLL.Service
                     LastName = userDto.LastName,
                 };
 
+                // создаем две роли
+                var role1 = new ApplicationRole { Name = "admin" };
+                var role2 = new ApplicationRole { Name = "user" };
+
+                // добавляем роли в бд
+                DB.RoleManager.Create(role1);
+                DB.RoleManager.Create(role2);
+
                 var result = await DB.UserManager.CreateAsync(user, userDto.Password);
 
-                await DB.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                await DB.UserManager.AddToRoleAsync(user.Id, "user");
+
+                //await .SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
 
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
             }

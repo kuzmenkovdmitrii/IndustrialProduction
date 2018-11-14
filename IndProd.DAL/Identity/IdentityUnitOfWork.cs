@@ -21,7 +21,7 @@ namespace IndProd.DAL.Identity
         public IdentityUnitOfWork()
         {
             db = new IdentityContext();
-            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+            userManager = new ApplicationUserManager(new UserStore<User>(db));
             roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
             userRepository = new UserRepository(db);
         }
