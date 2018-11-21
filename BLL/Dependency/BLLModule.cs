@@ -10,7 +10,7 @@ namespace BLL.Dependency
         public override void Load()
         {
             Bind<IUserRepository>().To<UserRepository>();
-            Bind<IUnitOfWork>().To<UnitOfWork>();
+            Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
         }
     }
 }

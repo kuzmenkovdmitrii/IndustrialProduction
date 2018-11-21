@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using Common.Entities;
 using DAL.Context;
-using DAL.Repository;
-using DAL.Repository.Interface;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Identity
@@ -14,14 +12,12 @@ namespace DAL.Identity
 
         public ApplicationUserManager UserManager { get; }
         public ApplicationRoleManager RoleManager { get; }
-        public IUserRepository UserRepository { get; }
 
         public UnitOfWork()
         {
             db = new ApplicationContext();
             UserManager = new ApplicationUserManager(new UserStore<User>(db));
-            RoleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
-            UserRepository = new UserRepository(db);
+            RoleManager = new ApplicationRoleManager(new RoleStore<Role>(db));
         }
 
         public async Task SaveAsync()
@@ -44,7 +40,6 @@ namespace DAL.Identity
                 {
                     UserManager.Dispose();
                     RoleManager.Dispose();
-                    UserRepository.Dispose();
                 }
                 this.disposed = true;
             }

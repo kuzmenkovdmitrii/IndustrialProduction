@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{9D2DD6B9-D3B1-4FC1-9F2D-F6779D1261A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndProd.BLL", "BLL\IndProd.BLL.csproj", "{9D2DD6B9-D3B1-4FC1-9F2D-F6779D1261A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEB", "WEB\WEB.csproj", "{9B73128A-AF35-423B-8316-4E847D96B97A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndProd.WEB", "WEB\IndProd.WEB.csproj", "{9B73128A-AF35-423B-8316-4E847D96B97A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{6D3E9536-BCB9-43C9-BA3C-CD4AFB57A232}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndProd.DAL", "DAL\IndProd.DAL.csproj", "{6D3E9536-BCB9-43C9-BA3C-CD4AFB57A232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{7FA4A58B-7C46-4EE7-88C5-0C47C80A6DD1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndProd.Common", "Common\IndProd.Common.csproj", "{7FA4A58B-7C46-4EE7-88C5-0C47C80A6DD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

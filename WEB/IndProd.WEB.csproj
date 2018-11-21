@@ -205,17 +205,17 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
+    <ProjectReference Include="..\BLL\IndProd.BLL.csproj">
       <Project>{9d2dd6b9-d3b1-4fc1-9f2d-f6779d1261a4}</Project>
-      <Name>BLL</Name>
+      <Name>IndProd.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\IndProd.Common.csproj">
       <Project>{7fa4a58b-7c46-4ee7-88c5-0c47c80a6dd1}</Project>
-      <Name>Common</Name>
+      <Name>IndProd.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
+    <ProjectReference Include="..\DAL\IndProd.DAL.csproj">
       <Project>{6D3E9536-BCB9-43C9-BA3C-CD4AFB57A232}</Project>
-      <Name>DAL</Name>
+      <Name>IndProd.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

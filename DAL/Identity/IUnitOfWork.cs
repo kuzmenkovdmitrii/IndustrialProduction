@@ -5,7 +5,7 @@ namespace DAL.Identity
 {
     public interface IUnitOfWork
     {
-        IUserRepository UserRepository { get; }
+        //IUserRepository UserRepository { get; }
         ApplicationUserManager UserManager { get; }
         ApplicationRoleManager RoleManager { get; }
         Task SaveAsync();
