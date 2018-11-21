@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "All";
+    Layout = "~/Views/Shared/_Main.cshtml";
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        UpdateTargetId = "results"
+    };
+}
+<script>
+    var currentPage;
+    var orderType;
+    var numPages;
+    var changedId;
+
+    function CalcNumPages() {
+        $.ajax({
+            url: '@Url.Action("GetNumberOfUsers", "User")',
+            type: 'get',
+            success: function (result) {
+                numPages = result;
+            }
+        });
+    }
+
+    function EditModel() {
+        location.href = '@Url.Action("Edit", "User")' + '?id=' + changedId;
+    }
+
+    function OnSelectionChange(select) {
+        currentPage = 1;
+        RenderControls(currentPage);
+        orderType = select.options[select.selectedIndex].value;
+        $.ajax({
+            url: '@Url.Action("UsersPage", "User")',
+            data: 'page=1&sortOrder=' + orderType,
+            type: 'get',
+            success: function (result) {
+                $('#results').html(result);
+            }
+        });
+    }
+
+    function PaginationChange(page) {
+        currentPage = page;
+        RenderControls(page);
+        $.ajax({
+            url: '@Url.Action("UsersPage", "User")',
+            data: 'page=' + page + '&sortOrder=' + orderType,
+            type: 'get',
+            success: function (result) {
+                $('#results').html(result);
+            }
+        });
+    }
+
+    function RenderControls(page) {
+        currentPage = page;
+
+        var pagingControls = '<nav aria-label="Page navigation example"><ul class="pagination justify-content-center">';
+        pagingControls += '<li class="page-item';
+
+        if (currentPage == 1) {
+            pagingControls += ' disabled';
+        }
+
+        pagingControls += '"><input type="button" value="Previous" onclick="PaginationChange (' + (currentPage - 1) + ')" class="page-link"></li>';
+
+        CalcNumPages();
+        for (var i = 1; i <= numPages; i++) {
+            if (i != currentPage) {
+                pagingControls += '<li class="page-item"><input type="button" value="' + i + '" onclick="PaginationChange (' + i + ')" class="page-link"></li>';
+            } else {
+                pagingControls += '<li class="page-item disabled"><input type="button" value="' + i + '" onclick="PaginationChange (' + i + ')" class="page-link"></li>';
+            }
+
+        }
+
+        pagingControls += '<li class="page-item';
+
+        if (currentPage == numPages) {
+            pagingControls += ' disabled';
+        }
+
+        pagingControls += '"><input type="button" value="Next" onclick="PaginationChange (' + (currentPage + 1) + ')" class="page-link"></li>';
+
+        pagingControls += '</ul></nav>';
+
+        $('#paginationControl').html(pagingControls);
+    }
+</script>
+
+<div class="container" style="margin-bottom: 15px;margin-top:15px">
+    <div class="row justify-content-md-center">
+        <div class="border border-dark rounded col-lg-7">
+            <table class="table table-hover">
+                <thead class="thead-light ">
+                <tr>
+                    <th class="columnWidth-26per" scope="col">Name</th>
+                    <th class="columnWidth-26per" scope="col">LastName</th>
+                    <th class="columnWidth-26per" scope="col">MiddleName</th>
+                    <th style="width: 60px" scope="col"></th>
+                    <th style="width: 60px" scope="col"></th>
+                </tr>
+                </thead>
+                <tbody id="results">
+                @Html.Action("UsersPage", new {page = 1})
+                </tbody>
+            </table>
+            <div id="paginationControl">
+                <script>RenderControls(1);</script>
+            </div>
+        </div>
+        <div class="col-lg-2" style="margin-left: 15px">
+            <div class="border border-dark rounded">
+                <a class="btn btn-dark btn-block" data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
+                    Menu
+                </a>
+                <div class="collapse" id="collapseFilter">
+                    <div style="margin: 10px">
+                        <select class="custom-select mr-sm-2" id="sortOrder" onchange="OnSelectionChange(this)">
+                            <option selected value="Id">Id</option>
+                            <option value="Name">Name</option>
+                            <option value="LastName">LastName</option>
+                            <option value="MiddleName">MiddleName</option>
+                        </select>
+                    </div>
+                    <div class="marginItem" style="margin: 10px;">
+                        <div style="margin-top: 10px">
+                            <input type="button" class="btn btn-outline-success btn-block" value="Create" onclick="location.href = '@Url.Action("Create", "User")'" />
+                        </div>
+                        <div style="margin-top: 10px">
+                            <input type="button" class="btn btn-outline-secondary btn-block" value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

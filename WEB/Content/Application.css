@@ -1,0 +1,33 @@
+﻿.container-center {
+    background-color: #f5f5f5;
+    margin: auto;
+}
+
+.marginItem {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+tr.changes:hover {
+    
+}
+
+tr.changes input[type="button"] {
+    visibility: hidden;
+}
+
+tr.changes:hover input[type="button"] {
+    visibility: visible;
+}
+
+th.columnWidth-26per {
+    width: 26.6%;
+}
+
+th.columnWidth-10per {
+    width: 10%;
+}
+
+input[type="button"].stretch {
+    width: 60px!important;
+}

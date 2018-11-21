@@ -1,0 +1,17 @@
+﻿@model IEnumerable<WEB.Models.User>
+    @foreach (var user in Model)
+    {
+        <tr class="changes">
+            <td>@user.Name</td>
+            <td>@user.LastName</td>
+            <td>@user.MiddleName</td>
+            <td>
+                <input type="button" value="Edit" class="btn btn-outline-primary btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Edit", "User", new {id = user.Id})'"/>
+            </td>
+            <td>
+                <input type="button" value="Delete" class="btn btn-outline-danger btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Delete", "User", new {id = user.Id})'"/>
+            </td>
+        </tr>
+                @*<button type="button" data-id="@user.Id" class="list-group-item list-group-item-action">@user.Name @user.LastName @user.MiddleName</button>*@
+                @*<a href="" data-id='@user.Id' class="list-group-item list-group-item-action">@user.Name @user.LastName @user.MiddleName</a>*@
+    }

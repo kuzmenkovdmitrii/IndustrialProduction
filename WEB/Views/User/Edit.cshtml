@@ -1,0 +1,87 @@
+﻿@model WEB.Models.EditModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+<HTML>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Application.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 container-center">
+                <h4 class="text-center">Create user</h4>
+                @using (Html.BeginForm("Edit", "User"))
+                {
+                    <div class="form-group has-success has-feedback">
+                        @Html.TextBoxFor(x => x.Name, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.Name)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.Name)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.MiddleName, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.MiddleName)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.MiddleName)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.LastName, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.LastName)
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.LastName)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Age, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.Age)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.Age)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Phone, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.Phone)
+
+                        })
+
+                        <span>@Html.ValidationMessageFor(x => x.Phone)</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.Address, new
+                        {
+                            @class = "form-control",
+                            @placeholder = @Html.DisplayNameFor(x => x.Address)
+
+                        })
+                        <span>@Html.ValidationMessageFor(x => x.Address)</span>
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-outline-success" value="Edit" />
+                        <span>
+                            <input type="button" class="btn btn-outline-danger" Value="Cancel" onclick="location.href = '@Url.Action("All", "Home")'" />
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</HTML>

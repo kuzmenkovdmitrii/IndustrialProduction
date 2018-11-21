@@ -1,0 +1,104 @@
+﻿@model WEB.Models.User
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 container-center">
+            <h4 class="text-center">Create user</h4>
+            @using (Html.BeginForm("Create", "User"))
+            {
+                <div class="form-group has-success has-feedback">
+                    @Html.TextBoxFor(x => x.Name, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Name)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.Name)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.MiddleName, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.MiddleName)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.MiddleName)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.LastName, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.LastName)
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.LastName)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Email, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Email)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.Email)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Password, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Password)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.Password)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.ConfirmPassword, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.ConfirmPassword)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.ConfirmPassword)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Age, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Age)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.Age)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Phone, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Phone)
+
+                    })
+
+                    <span>@Html.ValidationMessageFor(x => x.Phone)</span>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Address, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Address)
+
+                    })
+                    <span>@Html.ValidationMessageFor(x => x.Address)</span>
+                </div>
+                <div class="text-center">
+                    <input type="submit" class="btn btn-outline-success" value="Add"/>
+                    <span>
+                        <input type="button" class="btn btn-outline-danger" Value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'"/>
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
