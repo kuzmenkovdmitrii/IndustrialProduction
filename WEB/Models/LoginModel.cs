@@ -4,9 +4,9 @@ namespace WEB.Models
 {
     public class LoginModel
     {
-        [Display(Name = "Email address")]
-        [Required(ErrorMessage = "Поле Email не может быть пустым")]
-        [EmailAddress(ErrorMessage = "Неверно введен Email")]
+        [Display(Name = "UserName")]
+        [Required(ErrorMessage = "Поле UserName не может быть пустым")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Не верная длина")]
         public string UserName { get; set; }
 
         [Display(Name = "Password")]

@@ -12,10 +12,6 @@ namespace Common.Entities
         [NotMapped]
         public string Password { get; set; }
 
-        //public override string Email { get; set; }
-
-        //public override string UserName { get; set; }
-
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -96,9 +96,12 @@
   <ItemGroup>
     <Compile Include="Dependency\BLLModule.cs" />
     <Compile Include="Infrastructure\OperationDetails.cs" />
-    <Compile Include="Infrastructure\ValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\IUserService.cs" />
+    <Compile Include="Service\Interface\IOrderService.cs" />
+    <Compile Include="Service\Interface\IProductService.cs" />
+    <Compile Include="Service\Interface\IUserService.cs" />
+    <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

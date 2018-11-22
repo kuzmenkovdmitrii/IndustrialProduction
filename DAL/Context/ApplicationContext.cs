@@ -6,8 +6,8 @@ namespace DAL.Context
 {
     public class ApplicationContext : IdentityDbContext<User>
     {
-        //public DbSet<Product> Products { get; set; }
-        //public DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public ApplicationContext() : base("IndProdDB20")
         {

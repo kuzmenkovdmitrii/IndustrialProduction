@@ -1,4 +1,5 @@
-﻿using DAL.Identity;
+﻿using DAL.Context;
+using DAL.Identity;
 using DAL.Repository;
 using DAL.Repository.Interface;
 using Ninject.Modules;
@@ -9,7 +10,9 @@ namespace BLL.Dependency
     {
         public override void Load()
         {
-            Bind<IUserRepository>().To<UserRepository>();
+            Bind<IOrderRepository>().To<OrderRepository>();
+            Bind<IProductRepository>().To<ProductRepository>().InSingletonScope();
+            //Bind<IUserRepository>().To<UserRepository>().InSingletonScope();
             Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
         }
     }

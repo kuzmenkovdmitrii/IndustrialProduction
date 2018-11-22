@@ -1,4 +1,5 @@
 ﻿using BLL.Service;
+using BLL.Service.Interface;
 using Ninject.Modules;
 
 namespace WEB.Dep
@@ -8,6 +9,8 @@ namespace WEB.Dep
         public override void Load()
         {
             Bind<IUserService>().To<UserService>();
+            Bind<IOrderService>().To<OrderService>();
+            Bind<IProductService>().To<ProductService>();
         }
     }
 }

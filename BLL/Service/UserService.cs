@@ -5,14 +5,14 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using BLL.Infrastructure;
 using Common.Entities;
-using DAL.Identity;
+using DAL.Context;
 using Microsoft.AspNet.Identity;
 
 namespace BLL.Service
 {
     public class UserService : IUserService
     {
-        IUnitOfWork DB { get; set; }
+        IUnitOfWork DB { get; }
 
         public UserService(IUnitOfWork db)
         {
@@ -24,16 +24,16 @@ namespace BLL.Service
             return DB.UserManager.Users;
         }
 
-        public User Get(string id)
+        public async Task<User> Get(string id)
         {
-            User user = DB.UserManager.Users.FirstOrDefault(x => x.Id == id);
+            User user = await DB.UserManager.Users.FirstOrDefaultAsync(x => x.Id == id);
 
             if (user != null)
             {
                 return user;
             }
 
-            return null;
+            return user;
         }
 
         public async Task<OperationDetails> Create(User user)
@@ -56,7 +56,7 @@ namespace BLL.Service
                 //await DB.UserManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
 
-                return new OperationDetails(true, "Регистрация успешно пройдена", "");
+                return new OperationDetails(true, "Регистрация успешно пройдена");
             }
             else
             {
@@ -67,7 +67,7 @@ namespace BLL.Service
         public async Task<ClaimsIdentity> Authenticate(User user)
         {
             ClaimsIdentity claim = null;
-            var findUser = await DB.UserManager.FindAsync(user.Email, user.Password);
+            var findUser = await DB.UserManager.FindAsync(user.UserName, user.Password);
 
             if (findUser != null)
             {

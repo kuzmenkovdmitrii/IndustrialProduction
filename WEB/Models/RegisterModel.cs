@@ -6,8 +6,13 @@ namespace WEB.Models
     {
         [Display(Name = "UserName")]
         [Required(ErrorMessage = "Поле UserName не может быть пустым")]
-        [StringLength(25, MinimumLength = 3, ErrorMessage = "Не верная длина")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Не верная длина")]
         public string UserName { get; set; }
+
+        [Display(Name = "Email address")]
+        [Required(ErrorMessage = "Поле Email не может быть пустым")]
+        [EmailAddress(ErrorMessage = "Неверно введен Email")]
+        public string Email { get; set; }
 
         [Display(Name = "Password")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Поле Password не может быть пустым")]
@@ -30,10 +35,5 @@ namespace WEB.Models
         [Required(ErrorMessage = "Поле LastName не может быть пустым")]
         [StringLength(25, MinimumLength = 3, ErrorMessage = "Не верная длина")]
         public string LastName { get; set; }
-
-        [Display(Name = "Email address")]
-        [Required(ErrorMessage = "Поле Email не может быть пустым")]
-        [EmailAddress(ErrorMessage = "Неверно введен Email")]
-        public string Email { get; set; }
     }
 }

@@ -10,6 +10,7 @@
             <h4 class="text-center">Registration</h4>
             @using (Html.BeginForm("Registration", "Account"))
             {
+                @Html.AntiForgeryToken()
                 <div class="form-group has-success has-feedback">
                     @Html.TextBoxFor(x => x.UserName, new
                     {
