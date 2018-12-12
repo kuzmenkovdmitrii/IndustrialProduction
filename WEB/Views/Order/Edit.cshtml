@@ -2,48 +2,70 @@
 
 @{
     Layout = "~/Views/Shared/_Main.cshtml";
-    ViewBag.Title = "Create product";
+    ViewBag.Title = "Edit order";
 }
 
-<div class="container">
-    <div class="row justify-content-md-center">
-        <div class="col-md-4 border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
-            <h4 class="text-center">Create order</h4>
-            @using (Html.BeginForm("Login", "Account"))
-            {
-                <div class="form-group">
-                    @Html.TextBoxFor(x => x.Products, new
-                    {
-                        @class = "form-control",
-                        @placeholder = @Html.DisplayNameFor(x => x.Products)
-
-                    })
-                    <span>@Html.ValidationMessageFor(x => x.Products)</span>
-                </div>
-                <div class="form-group">
-                    @Html.TextBoxFor(x => x.Days, new
-                    {
-                        @class = "form-control",
-                        @placeholder = @Html.DisplayNameFor(x => x.Days)
-
-                    })
-                    <span>@Html.ValidationMessageFor(x => x.Days)</span>
-                </div>
-                <div class="form-group">
-                    @Html.TextBoxFor(x => x.Count, new
-                    {
-                        @class = "form-control",
-                        @placeholder = @Html.DisplayNameFor(x => x.Count)
-                    })
-                    <span>@Html.ValidationMessageFor(x => x.Count)</span>
-                </div>
-                <div class="text-center" style="margin: 15px">
-                    <input type="submit" class="btn btn-outline-success" value="Login" />
-                    <span>
-                        <input type="button" class="btn btn-outline-danger" Value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'" />
-                    </span>
-                </div>
-            }
+<div class="border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
+    <h4 class="text-center">Create order</h4>
+    @using (Html.BeginForm("Edit", "Order"))
+    {
+        <div class="form-group">
+            <select class="custom-select mr-sm-2" id="ProductId" name="ProductId" onchange="OnSelectionChange(this)">
+                @Html.Action("ProductsInSelect", "Product")
+            </select>
         </div>
-    </div>
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.Count, new
+            {
+                @class = "form-control",
+                @placeholder = @Html.DisplayNameFor(x => x.Count)
+            })
+            <span>@Html.ValidationMessageFor(x => x.Count)</span>
+        </div>
+
+        <div class="btn-group btn-group-toggle justify-content-md-center" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" id="Monday" name="Monday"> Пн
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" id="Tuesday" name="Tuesday"> Вт
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" id="Wednesday" name="Wednesday"> Ср
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" id="Thursday" name="Thursday"> Чт
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" id="Friday" name="Friday"> Пт
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" id="Saturday" name="Saturday"> Сб
+            </label>
+            <label class="btn btn-primary">
+                <input type="checkbox" autocomplete="off" id="Sunday" name="Sunday"> Вс
+            </label>
+        </div>
+
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="margin-top: 10px">
+            <label class="btn btn-primary active">
+                <input type="radio" name="OnceAWeek" id="OnceAWeek" autocomplete="off" checked> Раз в неделю
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="TwiceAWeek" id="TwiceAWeek" autocomplete="off"> Раз в 2 недели
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="ThreeTimesAWeek" id="ThreeTimesAWeek" autocomplete="off"> Раз в 3 недели
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="OnceAMonth" id="OnceAMonth" autocomplete="off"> Раз в месяц
+            </label>
+        </div>
+        <div class="text-center" style="margin: 15px">
+            <input type="submit" class="btn btn-outline-success" value="Сохранить" />
+            <span>
+                <input type="button" class="btn btn-outline-danger" Value="Назад" onclick="location.href = '@Url.Action("Index", "Home")'" />
+            </span>
+        </div>
+    }
 </div>

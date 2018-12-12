@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "_AdminPage";
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+<div class="row" style="margin-top: 10px">
+    <div class="col-md-2">
+        <div class=" border border-dark rounded">
+            <div class="btn-group container-fluid">
+                <button type="button" class="btn bg-white dropdown-toggle btn-block text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Заказы
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("All", "Order")">Все</a>
+                    <a class="dropdown-item" href="@Url.Action("Create", "Order")">Создать</a>
+                </div>
+            </div>
+            <div class="btn-group container-fluid">
+                <button type="button" class="btn bg-white dropdown-toggle btn-block text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Продукты
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("All", "Product")">Все</a>
+                    <a class="dropdown-item" href="@Url.Action("Create", "Product")">Создать</a>
+                </div>
+            </div>
+            <div class="btn-group container-fluid">
+                <button type="button" class="btn bg-white dropdown-toggle btn-block text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Статусы заказов
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="@Url.Action("All", "OrderStatus")">Все</a>
+                    <a class="dropdown-item" href="@Url.Action("Create", "OrderStatus")">Создать</a>
+                </div>
+            </div>
+            @*<a class="nav-link active" data-toggle="pill" href="@Url.Action("All", "Order")" role="tab">Заказы</a>
+                <a class="nav-link" data-toggle="pill" href="@Url.Action("All", "Product")" role="tab">Продукты</a>
+                <a class="nav-link" data-toggle="pill" href="@Url.Action("All", "OrderStatus")" role="tab">Статусы заказов</a>*@
+        </div>
+    </div>
+    <div class="col-md-10 container-fluid text-center">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+</div>

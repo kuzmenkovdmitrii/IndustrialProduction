@@ -89,9 +89,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CommonRepository.cs" />
     <Compile Include="Repository\Interface\IOrderRepository.cs" />
+    <Compile Include="Repository\Interface\IOrderStatusRepository.cs" />
     <Compile Include="Repository\Interface\IProductRepository.cs" />
     <Compile Include="Repository\Interface\IRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\OrderStatusRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>

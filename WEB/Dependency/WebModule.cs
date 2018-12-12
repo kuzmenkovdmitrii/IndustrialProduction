@@ -10,6 +10,7 @@ namespace WEB.Dep
         {
             Bind<IUserService>().To<UserService>();
             Bind<IOrderService>().To<OrderService>();
+            Bind<IOrderStatusService>().To<OrderStatusService>();
             Bind<IProductService>().To<ProductService>();
         }
     }

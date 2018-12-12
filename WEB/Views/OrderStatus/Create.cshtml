@@ -1,0 +1,28 @@
+﻿@model WEB.Models.CreateOrderStatusModel
+
+@{
+    ViewBag.Title = "Создание статуса";
+    Layout = "~/Views/Shared/_AdminPage.cshtml";
+}
+
+<div class="border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
+    <h4 class="text-center">Create order</h4>
+    @using (Html.BeginForm("Create", "OrderStatus"))
+    {
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.Name, new
+            {
+                @class = "form-control",
+                @placeholder = @Html.DisplayNameFor(x => x.Name)
+
+            })
+            <span>@Html.ValidationMessageFor(x => x.Name)</span>
+        </div>
+        <div class="text-center" style="margin: 15px">
+            <input type="submit" class="btn btn-outline-success" value="Создать" />
+            <span>
+                <input type="button" class="btn btn-outline-danger" Value="Назад" onclick="location.href = '@Url.Action("Index", "Home")'" />
+            </span>
+        </div>
+    }
+</div>

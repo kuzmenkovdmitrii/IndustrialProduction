@@ -8,10 +8,10 @@
     <div class="row justify-content-md-center">
         <div class="col-md-4 border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
             <h4 class="text-center">Log-in</h4>
-            @using (Html.BeginForm("Login", "Account"))
+            @using (Html.BeginForm("Login", "Account", new {@class="text-center"}))
             {
                 @Html.AntiForgeryToken()
-                <div class="form-group">
+                <div class="md-form">
                     @Html.TextBoxFor(x => x.UserName, new
                     {
                         @class = "form-control",

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Common.Entities.Order>
+
+@{
+    ViewBag.Title = "GetOrders";
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+@foreach (var order in Model)
+{
+    <tr class="changes">
+        <td>@order.Id</td>
+        <td>@order.Payment</td>
+        <td>@order.Status</td>
+        <td>
+            <input type="button" value="Подробнее" class="btn btn-outline-primary btn-block btn-sm stretch" onclick="location.href = '@Url.Action("GetOrders", "Account", new {id = order.Id})'"/>
+        </td>
+    </tr>
+}

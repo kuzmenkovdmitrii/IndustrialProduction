@@ -13,16 +13,18 @@ namespace DAL.Context
         private ApplicationContext db;
 
         public IOrderRepository OrderRepository { get; }
+        public IOrderStatusRepository OrderStatusRepository { get; }
         public IProductRepository ProductRepository { get; }
         public ApplicationUserManager UserManager { get; }
         public ApplicationRoleManager RoleManager { get; }
 
-        public UnitOfWork(IOrderRepository orderRepository, IProductRepository productRepository)
+        public UnitOfWork(IOrderRepository orderRepository, IOrderStatusRepository orderStatusRepository, IProductRepository productRepository)
         {
             db = new ApplicationContext();
             UserManager = new ApplicationUserManager(new UserStore<User>(db));
             RoleManager = new ApplicationRoleManager(new RoleStore<Role>(db));
             OrderRepository = orderRepository;
+            OrderStatusRepository = orderStatusRepository;
             ProductRepository = productRepository;
 
         }

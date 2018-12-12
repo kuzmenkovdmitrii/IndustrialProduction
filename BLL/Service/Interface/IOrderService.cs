@@ -13,5 +13,6 @@ namespace BLL.Service.Interface
         OperationDetails Edit(Order order);
         IEnumerable<Order> GetAll();
         Task<Order> Get(int id);
+        IEnumerable<Order> GetOrdersByUserId(string id);
     }
 }

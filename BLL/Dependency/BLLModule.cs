@@ -10,8 +10,9 @@ namespace BLL.Dependency
     {
         public override void Load()
         {
-            Bind<IOrderRepository>().To<OrderRepository>();
+            Bind<IOrderRepository>().To<OrderRepository>().InSingletonScope();
             Bind<IProductRepository>().To<ProductRepository>().InSingletonScope();
+            Bind<IOrderStatusRepository>().To<OrderStatusRepository>().InSingletonScope();
             //Bind<IUserRepository>().To<UserRepository>().InSingletonScope();
             Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
         }

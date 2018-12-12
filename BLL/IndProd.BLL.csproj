@@ -98,9 +98,11 @@
     <Compile Include="Infrastructure\OperationDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Interface\IOrderService.cs" />
+    <Compile Include="Service\Interface\IOrderStatusService.cs" />
     <Compile Include="Service\Interface\IProductService.cs" />
     <Compile Include="Service\Interface\IUserService.cs" />
     <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\OrderStatusService.cs" />
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\UserService.cs" />
   </ItemGroup>

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
 using BLL.Service.Interface;
@@ -30,6 +32,12 @@ namespace WEB.Controllers
         public async Task<ActionResult> All()
         {
             return View(ProductService.GetAll());
+        }
+
+        public ActionResult ProductsInSelect()
+        {
+            var test = ProductService.GetAll();
+            return PartialView(test);
         }
 
         [HttpPost]

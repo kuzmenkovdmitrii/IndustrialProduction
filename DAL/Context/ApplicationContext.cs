@@ -8,8 +8,9 @@ namespace DAL.Context
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
 
-        public ApplicationContext() : base("IndProdDB20")
+        public ApplicationContext() : base("IndProdDB22")
         {
 
         }

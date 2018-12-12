@@ -1,11 +1,14 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using AutoMapper;
 using BLL.Service;
+using BLL.Service.Interface;
 using Common.Entities;
+using Microsoft.AspNet.Identity;
 using WEB.Models;
 
 namespace WEB.Controllers
@@ -13,15 +16,20 @@ namespace WEB.Controllers
     public class AccountController : Controller
     {
         IUserService UserService { get; }
+        IOrderService OrderService { get; }
 
         private IAuthenticationManager AuthenticationManager
         {
-            get { return HttpContext.GetOwinContext().Authentication; }
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
         }
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, IOrderService orderService)
         {
             UserService = userService;
+            OrderService = orderService;
         }
 
         public ActionResult Login()
@@ -39,13 +47,89 @@ namespace WEB.Controllers
             return View();
         }
 
+        public ActionResult Profile()
+        {
+            //User user = new User();
+            //user.FirstName = "Dima";
+            //user.LastName = "Kuzmenkov";
+            //user.Orders = new List<Order>()
+            //{
+            //    new Order()
+            //    {
+            //        Id = 1,
+            //        Status = new OrderStatus()
+            //        {
+            //            Id = 1,
+            //            Name = "В обработке"
+            //        },
+            //        Products = new List<Product>()
+            //        {
+            //            new Product()
+            //            {
+            //                Id = 1,
+            //                Name = "Рельсы",
+            //                Price = 132
+            //            },
+            //            new Product()
+            //            {
+            //                Id = 2,
+            //                Name = "Шпалы",
+            //                Price = 12
+            //            }
+            //        },
+            //        Count = 4
+            //    },
+            //    new Order()
+            //    {
+            //        Id = 2,
+            //        Status = new OrderStatus()
+            //        {
+            //            Id = 2,
+            //            Name = "Поставлен"
+            //        },
+            //        Products = new List<Product>()
+            //        {
+            //            new Product()
+            //            {
+            //                Id = 3,
+            //                Name = "Яблоки",
+            //                Price = 12
+            //            },
+            //            new Product()
+            //            {
+            //                Id = 4,
+            //                Name = "Груши",
+            //                Price = 5
+            //            }
+            //        },
+            //        Count = 4
+            //    }
+            //};
+            User user = UserService.Get(this.User.Identity.GetUserId()).Result;
+
+            return View(user);
+        }
+
+        public ActionResult GetOrders()
+        {
+            return PartialView(OrderService.GetOrdersByUserId(this.User.Identity.GetUserId()));
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Registration(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = Mapper.Map<RegisterModel, User>(model);
+                User user = new User()
+                {
+                    UserName = model.UserName,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    Password = model.Password
+                };
 
                 var result = await UserService.Create(user);
 

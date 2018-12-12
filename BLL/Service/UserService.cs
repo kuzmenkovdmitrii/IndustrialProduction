@@ -42,8 +42,8 @@ namespace BLL.Service
             if (checkUser == null)
             {
 
-                //var role1 = new Role { Name = "admin" };
-                //var role2 = new Role { Name = "user" };
+                //var role1 = new Role { Name = "user" };
+                //var role2 = new Role { Name = "admin" };
 
                 //await DB.RoleManager.CreateAsync(role1);
                 //await DB.RoleManager.CreateAsync(role2);
@@ -51,7 +51,7 @@ namespace BLL.Service
                 var result = await DB.UserManager.CreateAsync(user, user.Password);
 
                 await DB.UserManager.AddToRoleAsync(user.Id, "user");
-                //await DB.UserManager.AddToRoleAsync(user.Id, "admin");
+                await DB.UserManager.AddToRoleAsync(user.Id, "admin");
 
                 //await DB.UserManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -71,25 +71,13 @@ namespace BLL.Service
 
             if (findUser != null)
             {
-                claim = await DB.UserManager.CreateIdentityAsync(findUser, DefaultAuthenticationTypes.ApplicationCookie);
+                claim = await DB.UserManager.CreateIdentityAsync(findUser,
+                    DefaultAuthenticationTypes.ApplicationCookie);
             }
 
             return claim;
         }
 
-        public async Task SetInitialData(User admin, List<string> roles)
-        {
-            foreach (var roleName in roles)
-            {
-                var role = await DB.RoleManager.FindByNameAsync(roleName);
-                if (role == null)
-                {
-                    role = new Role { Name = roleName };
-                    await DB.RoleManager.CreateAsync(role);
-                }
-            }
-
-            await Create(admin);
-        }
+       
     }
 }

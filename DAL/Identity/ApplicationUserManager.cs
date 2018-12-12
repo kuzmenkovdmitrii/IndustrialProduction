@@ -1,4 +1,5 @@
-﻿using Common.Entities;
+﻿using System;
+using Common.Entities;
 using DAL.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

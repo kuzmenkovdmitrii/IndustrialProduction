@@ -14,16 +14,23 @@ namespace WEB.Controllers
     {
         IOrderService OrderService { get; }
         IUserService UserService { get; }
+        IProductService ProductService { get; }
 
-        public OrderController(IOrderService orderService, IUserService userService)
+        public OrderController(IOrderService orderService, IUserService userService, IProductService productService)
         {
             OrderService = orderService;
             UserService = userService;
+            ProductService = productService;
         }
 
         public ActionResult Create()
         {
             return View();
+        }
+
+        public ActionResult Get(int id)
+        {
+            return View(OrderService.Get(id).Result);
         }
 
         public async Task<ActionResult> Edit(int id)
@@ -42,7 +49,26 @@ namespace WEB.Controllers
         [HttpPost]
         public ActionResult Create(CreateOrderModel model)
         {
-            var order = Mapper.Map<CreateOrderModel, Order>(model);
+            Order order = new Order()
+            {
+                Count = model.Count,
+                Product = ProductService.Get(model.ProductId).Result,
+                Periodicity = new Periodicity()
+                {
+                    Monday = model.Monday,
+                    Tuesday = model.Tuesday,
+                    Wednesday = model.Wednesday,
+                    Thursday = model.Thursday,
+                    Friday = model.Friday,
+                    Saturday = model.Saturday,
+                    Sunday = model.Sunday,
+
+                    OnceAWeek = model.OnceAWeek,
+                    TwiceAWeek = model.TwiceAWeek,
+                    ThreeTimesAWeek = model.ThreeTimesAWeek,
+                    OnceAMonth = model.OnceAMonth
+                }
+            };
 
             var result = OrderService.Create(order);
 

@@ -1,0 +1,26 @@
+﻿@model Common.Entities.User
+
+@{
+    ViewBag.Title = "Профиль";
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+<div class="container" style="margin-bottom: 15px;margin-top:15px">
+    <div class="row justify-content-md-center">
+        <div class="border border-dark rounded col-lg-2">
+            <h4>Данные</h4>
+            <div>
+                Имя: @Model.FirstName
+            </div>
+            <div>
+                Фамилия: @Model.LastName
+            </div>
+        </div>
+        <div class="col-lg-5" style="margin-left: 15px">
+            <div class="border border-dark rounded">
+                <h4>Заказы</h4>
+                @Url.Action("GetOrders")
+            </div>
+        </div>
+    </div>
+</div>

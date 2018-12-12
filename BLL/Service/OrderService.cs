@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BLL.Infrastructure;
 using BLL.Service.Interface;
 using Common.Entities;
 using DAL.Context;
 using DAL.Repository;
+using Microsoft.AspNet.Identity;
 
 namespace BLL.Service
 {
@@ -21,8 +23,9 @@ namespace BLL.Service
         {
             if (!CheckExistence(order.Id))
             {
+                order.Status = DB.OrderStatusRepository.List().FirstOrDefault(x => x.Name == "В обработке");
                 DB.OrderRepository.Create(order);
-            return new OperationDetails(true, "Заказ успешно добавлен");
+                return new OperationDetails(true, "Заказ успешно добавлен");
             }
 
             return new OperationDetails(false, "Заказ уже существует");
@@ -60,6 +63,11 @@ namespace BLL.Service
         public async Task<Order> Get(int id)
         {
             return await DB.OrderRepository.Get(id);
+        }
+
+        public IEnumerable<Order> GetOrdersByUserId(string id)
+        {
+            return DB.UserManager.FindById(id).Orders;
         }
 
         private bool CheckExistence(int id)

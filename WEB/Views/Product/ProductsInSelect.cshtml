@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Common.Entities.Product>
+
+@{
+    ViewBag.Title = "All products";
+}
+
+@foreach (var product in Model)
+{
+    <option value="@product.Id">@product.Name</option>
+}
