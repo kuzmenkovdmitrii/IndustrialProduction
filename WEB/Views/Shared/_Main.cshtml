@@ -13,22 +13,57 @@
 <body>
     <div>
         <div>
-            <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
-                <a class="navbar-brand d-flex w-50 mr-auto" href="@Url.Action("Index", "Home")">Home</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">IndProd</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-                    <ul class="navbar-nav text-right">
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Login", "Home")">Login</a>
+                            <a class="nav-link" href="@Url.Action("Create", "Order")">Создать заказ</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Registration", "Home")">Registration</a>
-                        </li>
+                    }
                     </ul>
+                    <form class="navbar-nav form-inline my-2 my-lg-0">
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-link" href="@Url.Action("Login", "Home")">Вход</a>
+                            <a class="nav-link" href="@Url.Action("Registration", "Home")">Регистрация</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link" href="@Url.Action("Profile", "Account")">Профиль</a>
+                            <a class="nav-link" href="@Url.Action("Logout", "Account")">Выйти</a>
+                        }
+                    </form>
                 </div>
             </nav>
+
+            @*<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+                    <a class="navbar-brand d-flex w-50 mr-auto" href="@Url.Action("Index", "Home")">Home</a>
+                    <a class="navbar-brand d-flex w-50 mr-auto" href="@Url.Action("Index", "Home")">Home</a>
+                    <a class="nav-link mr-auto" href="@Url.Action("Create", "Order")">Создать заказ<span class="sr-only"></span></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+                        <ul class="navbar-nav text-right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Profile", "Account")">Профиль</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Login", "Home")">Вход</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Registration", "Home")">Регистрация</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>*@
         </div>
         <div>
             @RenderBody()

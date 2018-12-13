@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BLL.Infrastructure;
 using BLL.Service.Interface;
 using Common.Entities;
 using DAL.Context;
-using DAL.Repository;
 using Microsoft.AspNet.Identity;
 
 namespace BLL.Service
@@ -19,24 +17,34 @@ namespace BLL.Service
             DB = db;
         }
 
-        public OperationDetails Create(Order order)
+        public OperationDetails Create(Order order, string userId)
         {
-            if (!CheckExistence(order.Id))
+            var user = DB.UserManager.Users.FirstOrDefault(x => x.Id == userId);
+
+            if (user != null)
             {
                 order.Status = DB.OrderStatusRepository.List().FirstOrDefault(x => x.Name == "В обработке");
                 DB.OrderRepository.Create(order);
+                user.Orders.Add(order);
+                DB.UserManager.Update(user);
                 return new OperationDetails(true, "Заказ успешно добавлен");
             }
+            else
+            {
+                return new OperationDetails(false, "Пользователь не найден");
+            }
 
-            return new OperationDetails(false, "Заказ уже существует");
         }
 
-        public OperationDetails Delete(int id)
+        public OperationDetails Cancel(int id)
         {
-            if (CheckExistence(id))
+            var order = DB.OrderRepository.Get(id);
+
+            if (order != null)
             {
-                DB.OrderRepository.Delete(id);
-                return new OperationDetails(true, "Заказ успешно удалён");
+                order.Status = DB.OrderStatusRepository.List().FirstOrDefault(x => x.Name == "Отменён");
+                DB.OrderRepository.Update(order);
+                return new OperationDetails(true, "Заказ успешно отменён");
             }
 
             return new OperationDetails(false, "Заказа с таким id не существует");
@@ -60,14 +68,14 @@ namespace BLL.Service
             return DB.OrderRepository.List();
         }
 
-        public async Task<Order> Get(int id)
+        public Order Get(int id)
         {
-            return await DB.OrderRepository.Get(id);
+            return DB.OrderRepository.Get(id);
         }
 
         public IEnumerable<Order> GetOrdersByUserId(string id)
         {
-            return DB.UserManager.FindById(id).Orders;
+            return DB.OrderRepository.List().Where(x=>x.User.Id == id);
         }
 
         private bool CheckExistence(int id)

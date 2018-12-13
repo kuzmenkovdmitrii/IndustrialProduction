@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using Common.Entities;
 using DAL.Context;
 using DAL.Repository.Interface;
@@ -20,9 +19,9 @@ namespace DAL.Repository
             return DB.Products;
         }
 
-        public async Task<Product> Get(int id)
+        public Product Get(int id)
         {
-            return await DB.Products.FindAsync(id);
+            return DB.Products.Find(id);
         }
 
         public void Create(Product item)

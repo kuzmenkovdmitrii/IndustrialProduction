@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-md-4 border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
-            <h4 class="text-center">Registration</h4>
+            <h4 class="text-center">Регистрация</h4>
             @using (Html.BeginForm("Registration", "Account"))
             {
                 @Html.AntiForgeryToken()
@@ -64,9 +64,9 @@
                     <span>@Html.ValidationMessageFor(x => x.LastName)</span>
                 </div>
                 <div class="text-center" style="margin: 15px">
-                    <input type="submit" class="btn btn-outline-success" value="Register" />
+                    <input type="submit" class="btn btn-outline-success" value="Зарегистрироваться" />
                     <span>
-                        <input type="button" class="btn btn-outline-danger" Value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'" />
+                        <input type="button" class="btn btn-outline-danger" Value="Назад" onclick="location.href = '@Url.Action("Index", "Home")'" />
                     </span>
                 </div>
             }

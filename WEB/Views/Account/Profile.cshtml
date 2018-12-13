@@ -7,19 +7,44 @@
 
 <div class="container" style="margin-bottom: 15px;margin-top:15px">
     <div class="row justify-content-md-center">
-        <div class="border border-dark rounded col-lg-2">
+        <div class="col-lg-2">
+            <div class="border border-dark rounded" style="padding: 10px">
             <h4>Данные</h4>
             <div>
                 Имя: @Model.FirstName
             </div>
-            <div>
-                Фамилия: @Model.LastName
+                <div>
+                    Фамилия: @Model.LastName
+                </div>
             </div>
         </div>
-        <div class="col-lg-5" style="margin-left: 15px">
-            <div class="border border-dark rounded">
-                <h4>Заказы</h4>
-                @Url.Action("GetOrders")
+        <div class="col-lg-8" style="margin-left: 15px">
+            <div class="border border-dark rounded" style="padding: 10px;">
+                <h4 class="text-center">Заказы</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Товар
+                            </th>
+                            <th>
+                                Количество
+                            </th>
+                            <th>
+                                Стоимость
+                            </th>
+                            <th>
+                                Статус
+                            </th>
+                            <th style="width: 80px;">
+                            </th>
+                        </tr>
+                    </thead>
+                    @Html.Action("GetOrders")
+                </table>
             </div>
         </div>
     </div>

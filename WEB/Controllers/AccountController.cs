@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Owin.Security;
@@ -62,20 +63,11 @@ namespace WEB.Controllers
             //            Id = 1,
             //            Name = "В обработке"
             //        },
-            //        Products = new List<Product>()
-            //        {
-            //            new Product()
+            //        Product = new Product()
             //            {
             //                Id = 1,
             //                Name = "Рельсы",
             //                Price = 132
-            //            },
-            //            new Product()
-            //            {
-            //                Id = 2,
-            //                Name = "Шпалы",
-            //                Price = 12
-            //            }
             //        },
             //        Count = 4
             //    },
@@ -87,32 +79,68 @@ namespace WEB.Controllers
             //            Id = 2,
             //            Name = "Поставлен"
             //        },
-            //        Products = new List<Product>()
+            //        Product =  new Product()
             //        {
-            //            new Product()
-            //            {
             //                Id = 3,
             //                Name = "Яблоки",
             //                Price = 12
-            //            },
-            //            new Product()
-            //            {
-            //                Id = 4,
-            //                Name = "Груши",
-            //                Price = 5
-            //            }
             //        },
             //        Count = 4
             //    }
             //};
-            User user = UserService.Get(this.User.Identity.GetUserId()).Result;
+            //return View(user);
+            var id = this.User.Identity.GetUserId();
 
-            return View(user);
+            return View(UserService.Get(id));
         }
 
         public ActionResult GetOrders()
         {
-            return PartialView(OrderService.GetOrdersByUserId(this.User.Identity.GetUserId()));
+            //User user = new User();
+            //user.FirstName = "Dima";
+            //user.LastName = "Kuzmenkov";
+            //user.Orders = new List<Order>()
+            //{
+            //    new Order()
+            //    {
+            //        Id = 1,
+            //        Status = new OrderStatus()
+            //        {
+            //            Id = 1,
+            //            Name = "В обработке"
+            //        },
+            //        Product = new Product()
+            //        {
+            //            Id = 1,
+            //            Name = "Рельсы",
+            //            Price = 132
+            //        },
+            //        Count = 4,
+            //        Payment = 14
+            //    },
+            //    new Order()
+            //    {
+            //        Id = 2,
+            //        Status = new OrderStatus()
+            //        {
+            //            Id = 2,
+            //            Name = "Поставлен"
+            //        },
+            //        Product =  new Product()
+            //        {
+            //            Id = 3,
+            //            Name = "Яблоки",
+            //            Price = 12
+            //        },
+            //        Count = 2,
+            //        Payment = 3
+            //    }
+            //};
+
+            //return PartialView(OrderService.GetOrdersByUserId(this.User.Identity.GetUserId()));
+
+            var orders = OrderService.GetOrdersByUserId(this.User.Identity.GetUserId()).ToList();
+            return PartialView(orders);
         }
 
 

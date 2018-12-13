@@ -7,6 +7,7 @@ using BLL.Infrastructure;
 using Common.Entities;
 using DAL.Context;
 using Microsoft.AspNet.Identity;
+using Ninject.Infrastructure.Language;
 
 namespace BLL.Service
 {
@@ -24,20 +25,22 @@ namespace BLL.Service
             return DB.UserManager.Users;
         }
 
-        public async Task<User> Get(string id)
+        public User Get(string id)
         {
-            User user = await DB.UserManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+            User user = DB.UserManager.Users.FirstOrDefault(x => x.Id == id);
 
             if (user != null)
             {
+                user.Orders = DB.OrderRepository.List().Where(x => x.User.Id == id).ToList();
                 return user;
             }
 
-            return user;
+            return null;
         }
 
         public async Task<OperationDetails> Create(User user)
         {
+            user.Orders = new List<Order>();
             var checkUser = await DB.UserManager.FindByNameAsync(user.UserName);
             if (checkUser == null)
             {

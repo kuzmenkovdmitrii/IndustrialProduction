@@ -27,13 +27,13 @@ namespace WEB.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Edit(int id)
+        public  ActionResult Edit(int id)
         {
-            var orderStatus = Mapper.Map<OrderStatus, EditOrderStatusModel>(await orderStatusService.Get(id));
+            var orderStatus = Mapper.Map<OrderStatus, EditOrderStatusModel>(orderStatusService.Get(id));
             return View(orderStatus);
         }
 
-        public async Task<ActionResult> All()
+        public ActionResult All()
         {
             return View(orderStatusService.GetAll());
         }

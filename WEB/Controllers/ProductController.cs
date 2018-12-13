@@ -23,13 +23,13 @@ namespace WEB.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Edit(int id)
+        public ActionResult Edit(int id)
         {
-            var product = Mapper.Map<Product, EditProductModel>(await ProductService.Get(id));
+            var product = Mapper.Map<Product, EditProductModel>(ProductService.Get(id));
             return View(product);
         }
 
-        public async Task<ActionResult> All()
+        public ActionResult All()
         {
             return View(ProductService.GetAll());
         }
@@ -59,9 +59,13 @@ namespace WEB.Controllers
             return View();
         }
 
-        public ActionResult Edit(ProductModel model)
+        public ActionResult Edit(EditProductModel model)
         {
-            var product = Mapper.Map<ProductModel, Product>(model);
+            Product product = new Product()
+            {
+                Id = model.Id,
+                Name = model.Name
+            };
 
             var result = ProductService.Edit(product);
 

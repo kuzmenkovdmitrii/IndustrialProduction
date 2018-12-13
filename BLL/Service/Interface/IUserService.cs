@@ -10,7 +10,7 @@ namespace BLL.Service
     {
         Task<OperationDetails> Create(User user);
         Task<ClaimsIdentity> Authenticate(User user);
-        Task<User> Get(string id);
+        User Get(string id);
         IEnumerable<User> GetAll();
     }
 }

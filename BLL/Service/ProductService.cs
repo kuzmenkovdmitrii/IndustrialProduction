@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using BLL.Infrastructure;
 using BLL.Service.Interface;
 using Common.Entities;
@@ -56,9 +55,9 @@ namespace BLL.Service
             return DB.ProductRepository.List();
         }
 
-        public async Task<Product> Get(int id)
+        public Product Get(int id)
         {
-            return await DB.ProductRepository.Get(id);
+            return DB.ProductRepository.Get(id);
         }
 
         private bool CheckExistence(int id)

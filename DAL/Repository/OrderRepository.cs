@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using Common.Entities;
 using DAL.Context;
 using DAL.Repository.Interface;
@@ -17,12 +16,20 @@ namespace DAL.Repository
 
         public IEnumerable<Order> List()
         {
-            return DB.Orders;
+            return DB.Orders.Include(x => x.Product)
+                .Include(x => x.Periodicity)
+                .Include(x => x.Status)
+                .Include(x => x.User)
+                .ToList();
         }
 
-        public async Task<Order> Get(int id)
+        public Order Get(int id)
         {
-            return await DB.Orders.FindAsync(id);
+            return DB.Orders.Include(x => x.Product)
+                .Include(x => x.Periodicity)
+                .Include(x => x.Status)
+                .Include(x=>x.User)
+                .FirstOrDefault(x=>x.Id == id);
         }
 
         public void Create(Order item)

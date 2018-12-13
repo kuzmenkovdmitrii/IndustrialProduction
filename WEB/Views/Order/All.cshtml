@@ -1,45 +1,48 @@
 ﻿@model IEnumerable<WEB.Models.OrderModel>
 
 @{
+    /**/
+
     ViewBag.Title = "All orders";
     Layout = "~/Views/Shared/_Main.cshtml";
 }
-        All orders
-        <div class="border border-dark rounded">
-            <table class="table table-hover">
-                <thead class="thead-light ">
-                <tr>
-                    <th class="columnWidth-26per" scope="col">Id</th>
-                    <th class="columnWidth-26per" scope="col">Status</th>
-                    <th class="columnWidth-26per" scope="col">Count</th>
-                    <th class="columnWidth-26per" scope="col">Payment</th>
-                    <th class="columnWidth-26per" scope="col">Product</th>
-                    <th style="width: 60px" scope="col"></th>
-                    <th style="width: 60px" scope="col"></th>
-                </tr>
-                </thead>
-                <tbody id="results">
-                @foreach (var order in Model)
-                {
-                    <tr class="changes">
-                        <td>@order.Id</td>
-                        <td>@order.Status</td>
-                        <td>@order.Count</td>
-                        <td>@order.Payment</td>
-                        <td>
-                            @order.Product.Name
-                        </td>
-                        <td>
-                            <input type="button" value="Edit" class="btn btn-outline-primary btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Edit", "Order", new {id = order.Id})'"/>
-                        </td>
-                        <td>
-                            <input type="button" value="Delete" class="btn btn-outline-danger btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Delete", "Order", new {id = order.Id})'"/>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-        </div>
+ 
+<div class="border border-dark rounded">
+    <h4 class="text-center">Все заказы</h4>
+    <table class="table table-hover">
+        <thead class="thead-light ">
+        <tr>
+            <th class="columnWidth-26per" scope="col">Id</th>
+            <th class="columnWidth-26per" scope="col">Status</th>
+            <th class="columnWidth-26per" scope="col">Count</th>
+            <th class="columnWidth-26per" scope="col">Payment</th>
+            <th class="columnWidth-26per" scope="col">Product</th>
+            <th style="width: 60px" scope="col"></th>
+            <th style="width: 60px" scope="col"></th>
+        </tr>
+        </thead>
+        <tbody id="results">
+        @foreach (var order in Model)
+        {
+            <tr class="changes">
+                <td>@order.Id</td>
+                <td>@order.Status</td>
+                <td>@order.Count</td>
+                <td>@order.Payment</td>
+                <td>
+                    @order.Product.Name
+                </td>
+                <td>
+                    <input type="button" value="Edit" class="btn btn-outline-primary btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Edit", "Order", new {id = order.Id})'"/>
+                </td>
+                <td>
+                    <input type="button" value="Delete" class="btn btn-outline-danger btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Delete", "Order", new {id = order.Id})'"/>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
 <div class="col-lg-2" style="margin-left: 15px">
     <div class="border border-dark rounded">
         <a class="btn btn-dark btn-block" data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
@@ -56,7 +59,7 @@
             </div>
             <div class="marginItem" style="margin: 10px;">
                 <div style="margin-top: 10px">
-                    <input type="button" class="btn btn-outline-secondary btn-block" value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'"/>
+                    <input type="button" class="btn btn-outline-secondary btn-block" value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'" />
                 </div>
             </div>
         </div>

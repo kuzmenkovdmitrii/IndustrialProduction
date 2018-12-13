@@ -28,22 +28,42 @@ namespace WEB.Controllers
             return View();
         }
 
-        public ActionResult Get(int id)
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
-            return View(OrderService.Get(id).Result);
+            if (id != null)
+            {
+                var order = OrderService.Get(id);
+
+
+                EditOrderModel model = new EditOrderModel()
+                {
+                    Id = order.Id,
+                    ProductId = order.Product.Id,
+                    Count = order.Count,
+                    Monday = order.Periodicity.Monday,
+                    Tuesday = order.Periodicity.Tuesday,
+                    Wednesday = order.Periodicity.Wednesday,
+                    Thursday = order.Periodicity.Thursday,
+                    Friday = order.Periodicity.Friday,
+                    Saturday = order.Periodicity.Saturday,
+                    Sunday = order.Periodicity.Sunday,
+
+                    OnceAWeek = order.Periodicity.OnceAWeek,
+                    TwiceAWeek = order.Periodicity.TwiceAWeek,
+                    ThreeTimesAWeek = order.Periodicity.ThreeTimesAWeek,
+                    OnceAMonth = order.Periodicity.OnceAMonth
+                };
+
+                return View(model);
+            }
+
+            return View();
         }
 
-        public async Task<ActionResult> Edit(int id)
+        public ActionResult All()
         {
-            var order = Mapper.Map<Order, EditOrderModel>(await OrderService.Get(id));
-            return View(order);
-        }
-
-        public async Task<ActionResult> All(string userId)
-        {
-            var user = await UserService.Get(userId);
-            var list = Mapper.Map<ICollection<Order>, IEnumerable<OrderModel>>(user.Orders);
-            return View(list);
+            return View(OrderService.GetAll());
         }
 
         [HttpPost]
@@ -52,7 +72,7 @@ namespace WEB.Controllers
             Order order = new Order()
             {
                 Count = model.Count,
-                Product = ProductService.Get(model.ProductId).Result,
+                Product = ProductService.Get(model.ProductId),
                 Periodicity = new Periodicity()
                 {
                     Monday = model.Monday,
@@ -70,7 +90,7 @@ namespace WEB.Controllers
                 }
             };
 
-            var result = OrderService.Create(order);
+            var result = OrderService.Create(order, User.Identity.GetUserId());
 
             if (result.Successed)
             {
@@ -84,15 +104,38 @@ namespace WEB.Controllers
             return View();
         }
 
-        public ActionResult Edit(OrderModel model)
+        [HttpPost]
+        public ActionResult Edit(EditOrderModel model)
         {
-            var order = Mapper.Map<OrderModel, Order>(model);
+            //var order = Mapper.Map<OrderModel, Order>(model);
+
+            Order order = new Order()
+            {
+                Id = model.Id,
+                Product = ProductService.Get(model.ProductId),
+                Count = model.Count,
+                Periodicity = new Periodicity()
+                {
+                    Monday = model.Monday,
+                    Tuesday = model.Tuesday,
+                    Wednesday = model.Wednesday,
+                    Thursday = model.Thursday,
+                    Friday = model.Friday,
+                    Saturday = model.Saturday,
+                    Sunday = model.Sunday,
+
+                    OnceAWeek = model.OnceAWeek,
+                    TwiceAWeek = model.TwiceAWeek,
+                    ThreeTimesAWeek = model.ThreeTimesAWeek,
+                    OnceAMonth = model.OnceAMonth
+                }
+            };
 
             var result = OrderService.Edit(order);
 
             if (result.Successed)
             {
-                return RedirectToAction("All", new {User = order.User});
+                return RedirectToAction("Profile", "Account");
             }
             else
             {
@@ -103,9 +146,9 @@ namespace WEB.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = OrderService.Delete(id);
+            var result = OrderService.Cancel(id);
 
-            return RedirectToAction("All", new {userId = User.Identity.GetUserId()});
+            return RedirectToAction("Profile", "Account");
         }
     }
 }

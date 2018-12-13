@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using BLL.Infrastructure;
 using BLL.Service.Interface;
 using Common.Entities;
@@ -56,9 +55,9 @@ namespace BLL.Service
             return DB.OrderStatusRepository.List();
         }
 
-        public async Task<OrderStatus> Get(int id)
+        public OrderStatus Get(int id)
         {
-            return await DB.OrderStatusRepository.Get(id);
+            return DB.OrderStatusRepository.Get(id);
         }
 
         private bool CheckExistence(int id)

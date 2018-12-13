@@ -8,11 +8,11 @@ namespace BLL.Service.Interface
 {
     public interface IOrderService
     {
-        OperationDetails Create(Order order);
-        OperationDetails Delete(int id);
+        OperationDetails Create(Order order, string userId);
+        OperationDetails Cancel(int id);
         OperationDetails Edit(Order order);
         IEnumerable<Order> GetAll();
-        Task<Order> Get(int id);
+        Order Get(int id);
         IEnumerable<Order> GetOrdersByUserId(string id);
     }
 }

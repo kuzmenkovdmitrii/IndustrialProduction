@@ -8,7 +8,7 @@ namespace DAL.Repository.Interface
         where T : class
     {
         IEnumerable<T> List();
-        Task<T> Get(int id);
+        T Get(int id);
 
         void Create(T item);
         void Update(T item);

@@ -11,6 +11,6 @@ namespace BLL.Service.Interface
         OperationDetails Delete(int id);
         OperationDetails Edit(Product product);
         IEnumerable<Product> GetAll();
-        Task<Product> Get(int id);
+        Product Get(int id);
     }
 }

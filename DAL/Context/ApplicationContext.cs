@@ -10,7 +10,7 @@ namespace DAL.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderStatus> OrderStatuses { get; set; }
 
-        public ApplicationContext() : base("IndProdDB22")
+        public ApplicationContext() : base("IndProdDB23")
         {
 
         }
