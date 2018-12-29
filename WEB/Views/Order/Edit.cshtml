@@ -11,6 +11,7 @@
             <h4 class="text-center">Редактирование заказа</h4>
             @using (Html.BeginForm("Edit", "Order"))
             {
+                @Html.HiddenFor(x=>x.Id)
                 <div class="form-group">
                     <select class="custom-select mr-sm-2" id="ProductId" name="ProductId" onchange="OnSelectionChange(this)">
                         @Html.Action("ProductsInSelect", "Product")

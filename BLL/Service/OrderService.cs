@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BLL.Infrastructure;
 using BLL.Service.Interface;
@@ -24,8 +26,10 @@ namespace BLL.Service
             if (user != null)
             {
                 order.Status = DB.OrderStatusRepository.List().FirstOrDefault(x => x.Name == "В обработке");
-                DB.OrderRepository.Create(order);
+                order.User = user;
+                
                 user.Orders.Add(order);
+                DB.OrderRepository.Create(order);
                 DB.UserManager.Update(user);
                 return new OperationDetails(true, "Заказ успешно добавлен");
             }
@@ -50,14 +54,26 @@ namespace BLL.Service
             return new OperationDetails(false, "Заказа с таким id не существует");
         }
 
-        public OperationDetails Edit(Order order)
+        public OperationDetails Edit(Order item)
         {
             try
             {
+                Product product = DB.ProductRepository.Get(item.Product.Id);
+                Order order = Get(item.Id);
+                order.Count = item.Count;
+                order.Payment = product.Price * order.Count;
+                order.Periodicity.Monday = item.Periodicity.Monday;
+                order.Periodicity.Tuesday = item.Periodicity.Tuesday;
+                order.Periodicity.Wednesday = item.Periodicity.Wednesday;
+                order.Periodicity.Thursday = item.Periodicity.Thursday;
+                order.Periodicity.Friday = item.Periodicity.Friday;
+                order.Periodicity.Saturday = item.Periodicity.Saturday;
+                order.Periodicity.Sunday = item.Periodicity.Sunday;
+                order.Product = product;
                 DB.OrderRepository.Update(order);
-                return new OperationDetails(false, "Заказ был успешно обновлён");
+                return new OperationDetails(true, "Заказ был успешно обновлён");
             }
-            catch
+            catch(Exception e)
             {
                 return new OperationDetails(false, "Заказ не был обновлён");
             }

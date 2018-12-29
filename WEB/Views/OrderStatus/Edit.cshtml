@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_AdminPage.cshtml";
 }
 
-<div class="border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
+<div class="col-md-4 border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
     <h4 class="text-center">Редактировать статус заказа</h4>
     @using (Html.BeginForm("Edit", "OrderStatus"))
     {
+        @Html.HiddenFor(x=>x.Id)
         <div class="form-group">
             @Html.TextBoxFor(x => x.Name, new
             {
@@ -21,7 +22,7 @@
         <div class="text-center" style="margin: 15px">
             <input type="submit" class="btn btn-outline-success" value="Сохранить" />
             <span>
-                <input type="button" class="btn btn-outline-danger" Value="Назад" onclick="location.href = '@Url.Action("Index", "Home")'" />
+                <input type="button" class="btn btn-outline-danger" Value="Назад" onclick="location.href = '@Url.Action("AdminPage", "Admin")'" />
             </span>
         </div>
     }

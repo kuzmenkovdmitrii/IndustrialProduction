@@ -5,10 +5,11 @@
     ViewBag.Title = "Edit product";
 }
 
-<div class="border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
-    <h4 class="text-center">Create order</h4>
+<div class="col-md-4 border border-dark rounded" style="margin: 15px; background-color: #f5f5f5;">
+    <h4 class="text-center">Изменить продукт</h4>
     @using (Html.BeginForm("Edit", "Product"))
     {
+        @Html.HiddenFor(x=>x.Id)
         <div class="form-group">
             @Html.TextBoxFor(x => x.Name, new
             {
@@ -27,9 +28,9 @@
             <span>@Html.ValidationMessageFor(x => x.Price)</span>
         </div>
         <div class="text-center" style="margin: 15px">
-            <input type="submit" class="btn btn-outline-success" value="Login" />
+            <input type="submit" class="btn btn-outline-success" value="Сохранить" />
             <span>
-                <input type="button" class="btn btn-outline-danger" Value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'" />
+                <input type="button" class="btn btn-outline-danger" Value="Назад" onclick="location.href = '@Url.Action("AdminPage", "Admin")'" />
             </span>
         </div>
     }

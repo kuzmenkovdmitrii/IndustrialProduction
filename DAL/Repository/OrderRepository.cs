@@ -34,7 +34,15 @@ namespace DAL.Repository
 
         public void Create(Order item)
         {
-            DB.Orders.Add(item);
+            Order saveOrd = new Order()
+            {
+                Count = item.Count,
+                Product = item.Product,
+                Periodicity = item.Periodicity,
+                Payment = item.Payment
+            };
+
+            DB.Orders.Attach(saveOrd);
             Save();
         }
 

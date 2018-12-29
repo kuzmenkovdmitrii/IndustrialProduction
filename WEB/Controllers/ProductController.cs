@@ -25,8 +25,14 @@ namespace WEB.Controllers
 
         public ActionResult Edit(int id)
         {
-            var product = Mapper.Map<Product, EditProductModel>(ProductService.Get(id));
-            return View(product);
+            Product product = ProductService.Get(id);
+            EditProductModel model = new EditProductModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price
+            };
+            return View(model);
         }
 
         public ActionResult All()
@@ -59,12 +65,14 @@ namespace WEB.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult Edit(EditProductModel model)
         {
             Product product = new Product()
             {
                 Id = model.Id,
-                Name = model.Name
+                Name = model.Name,
+                Price = model.Price
             };
 
             var result = ProductService.Edit(product);

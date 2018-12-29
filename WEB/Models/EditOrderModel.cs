@@ -11,7 +11,7 @@ namespace WEB.Models
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Display(Name = "Count")]
+        [Display(Name = "Количество")]
         [Required(ErrorMessage = "Field can't be empty")]
         [Range(1, Int32.MaxValue, ErrorMessage = "Invalid value of count")]
         public int Count { get; set; }

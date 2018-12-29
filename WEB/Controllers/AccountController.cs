@@ -50,45 +50,7 @@ namespace WEB.Controllers
 
         public ActionResult Profile()
         {
-            //User user = new User();
-            //user.FirstName = "Dima";
-            //user.LastName = "Kuzmenkov";
-            //user.Orders = new List<Order>()
-            //{
-            //    new Order()
-            //    {
-            //        Id = 1,
-            //        Status = new OrderStatus()
-            //        {
-            //            Id = 1,
-            //            Name = "В обработке"
-            //        },
-            //        Product = new Product()
-            //            {
-            //                Id = 1,
-            //                Name = "Рельсы",
-            //                Price = 132
-            //        },
-            //        Count = 4
-            //    },
-            //    new Order()
-            //    {
-            //        Id = 2,
-            //        Status = new OrderStatus()
-            //        {
-            //            Id = 2,
-            //            Name = "Поставлен"
-            //        },
-            //        Product =  new Product()
-            //        {
-            //                Id = 3,
-            //                Name = "Яблоки",
-            //                Price = 12
-            //        },
-            //        Count = 4
-            //    }
-            //};
-            //return View(user);
+         
             var id = this.User.Identity.GetUserId();
 
             return View(UserService.Get(id));
@@ -96,48 +58,6 @@ namespace WEB.Controllers
 
         public ActionResult GetOrders()
         {
-            //User user = new User();
-            //user.FirstName = "Dima";
-            //user.LastName = "Kuzmenkov";
-            //user.Orders = new List<Order>()
-            //{
-            //    new Order()
-            //    {
-            //        Id = 1,
-            //        Status = new OrderStatus()
-            //        {
-            //            Id = 1,
-            //            Name = "В обработке"
-            //        },
-            //        Product = new Product()
-            //        {
-            //            Id = 1,
-            //            Name = "Рельсы",
-            //            Price = 132
-            //        },
-            //        Count = 4,
-            //        Payment = 14
-            //    },
-            //    new Order()
-            //    {
-            //        Id = 2,
-            //        Status = new OrderStatus()
-            //        {
-            //            Id = 2,
-            //            Name = "Поставлен"
-            //        },
-            //        Product =  new Product()
-            //        {
-            //            Id = 3,
-            //            Name = "Яблоки",
-            //            Price = 12
-            //        },
-            //        Count = 2,
-            //        Payment = 3
-            //    }
-            //};
-
-            //return PartialView(OrderService.GetOrdersByUserId(this.User.Identity.GetUserId()));
 
             var orders = OrderService.GetOrdersByUserId(this.User.Identity.GetUserId()).ToList();
             return PartialView(orders);
@@ -170,6 +90,7 @@ namespace WEB.Controllers
                     ModelState.AddModelError(result.Property, result.Message);
                 }
             }
+            
             return View(model);
         }
 

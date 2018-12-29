@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using System.Web.Mvc;
 using BLL.Service;
 using BLL.Service.Interface;
 using Common.Entities;
@@ -69,53 +66,65 @@ namespace WEB.Controllers
         [HttpPost]
         public ActionResult Create(CreateOrderModel model)
         {
-            Order order = new Order()
+            if (ModelState.IsValid)
             {
-                Count = model.Count,
-                Product = ProductService.Get(model.ProductId),
-                Periodicity = new Periodicity()
+                Product product = ProductService.Get(model.ProductId);
+                Order order = new Order()
                 {
-                    Monday = model.Monday,
-                    Tuesday = model.Tuesday,
-                    Wednesday = model.Wednesday,
-                    Thursday = model.Thursday,
-                    Friday = model.Friday,
-                    Saturday = model.Saturday,
-                    Sunday = model.Sunday,
+                    Count = model.Count,
+                    Product = product,
+                    Periodicity = new Periodicity()
+                    {
+                        Monday = model.Monday,
+                        Tuesday = model.Tuesday,
+                        Wednesday = model.Wednesday,
+                        Thursday = model.Thursday,
+                        Friday = model.Friday,
+                        Saturday = model.Saturday,
+                        Sunday = model.Sunday,
 
-                    OnceAWeek = model.OnceAWeek,
-                    TwiceAWeek = model.TwiceAWeek,
-                    ThreeTimesAWeek = model.ThreeTimesAWeek,
-                    OnceAMonth = model.OnceAMonth
+                        OnceAWeek = model.OnceAWeek,
+                        TwiceAWeek = model.TwiceAWeek,
+                        ThreeTimesAWeek = model.ThreeTimesAWeek,
+                        OnceAMonth = model.OnceAMonth
+                    }
+                };
+
+                var result = OrderService.Create(order, User.Identity.GetUserId());
+
+                if (result.Successed)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        return View("All");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Profile", "Account");
+                    }
                 }
-            };
-
-            var result = OrderService.Create(order, User.Identity.GetUserId());
-
-            if (result.Successed)
-            {
-                return View("All");
-            }
-            else
-            {
-                ModelState.AddModelError(result.Property, result.Message);
+                else
+                {
+                    ModelState.AddModelError(result.Property, result.Message);
+                }
             }
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult Edit(EditOrderModel model)
         {
-            //var order = Mapper.Map<OrderModel, Order>(model);
+            Product product = ProductService.Get(model.ProductId);
 
             Order order = new Order()
             {
                 Id = model.Id,
-                Product = ProductService.Get(model.ProductId),
+                Product = product,
                 Count = model.Count,
                 Periodicity = new Periodicity()
                 {
+                    Id = model.ProductId,
                     Monday = model.Monday,
                     Tuesday = model.Tuesday,
                     Wednesday = model.Wednesday,
@@ -128,7 +137,8 @@ namespace WEB.Controllers
                     TwiceAWeek = model.TwiceAWeek,
                     ThreeTimesAWeek = model.ThreeTimesAWeek,
                     OnceAMonth = model.OnceAMonth
-                }
+                },
+                Payment = model.Count * product.Price
             };
 
             var result = OrderService.Edit(order);

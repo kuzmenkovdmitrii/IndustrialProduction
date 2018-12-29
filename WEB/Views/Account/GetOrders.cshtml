@@ -10,7 +10,7 @@
         <td>@order.Payment</td>
         <td>@order.Status.Name</td>
         <td>
-            <input type="button" value="Подробнее" class="btn btn-outline-primary btn-block btn-sm" style="width: 150px;" onclick="location.href = '@Url.Action("Edit", "Order", new {id = 2})'"/>
+            <input type="button" value="Подробнее" class="btn btn-outline-primary btn-block btn-sm" style="width: 150px;" onclick="location.href = '@Url.Action("Edit", "Order", new {id = order.Id})'"/>
         </td>
     </tr>
 }

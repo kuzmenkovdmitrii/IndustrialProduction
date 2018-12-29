@@ -11,7 +11,7 @@
             @using (Html.BeginForm("Login", "Account", new {@class="text-center"}))
             {
                 @Html.AntiForgeryToken()
-                <div class="md-form">
+                <div class="form-group">
                     @Html.TextBoxFor(x => x.UserName, new
                     {
                         @class = "form-control",
@@ -23,7 +23,8 @@
                     @Html.TextBoxFor(x => x.Password, new
                     {
                         @class = "form-control",
-                        @placeholder = @Html.DisplayNameFor(x => x.Password)
+                        @placeholder = @Html.DisplayNameFor(x => x.Password),
+                        @type = "password"
 
                     })
                     <span>@Html.ValidationMessageFor(x => x.Password)</span>

@@ -27,10 +27,13 @@ namespace BLL.Service
 
         public User Get(string id)
         {
-            User user = DB.UserManager.Users.FirstOrDefault(x => x.Id == id);
+            User user = DB.UserManager.Users.
+                        Include(x=>x.Orders).
+                        FirstOrDefault(x => x.Id == id);
 
             if (user != null)
             {
+                //var orders = DB.OrderRepository.List();
                 user.Orders = DB.OrderRepository.List().Where(x => x.User.Id == id).ToList();
                 return user;
             }

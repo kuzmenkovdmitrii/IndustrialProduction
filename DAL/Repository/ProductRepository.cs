@@ -21,7 +21,7 @@ namespace DAL.Repository
 
         public Product Get(int id)
         {
-            return DB.Products.Find(id);
+            return DB.Products.FirstOrDefault(x=>x.Id == id);
         }
 
         public void Create(Product item)

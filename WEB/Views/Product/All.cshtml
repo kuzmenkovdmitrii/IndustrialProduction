@@ -5,55 +5,32 @@
     ViewBag.Title = "All products";
 }
 
-        All orders
-        <div class="border border-dark rounded col-lg-7">
-            <table class="table table-hover">
-                <thead class="thead-light ">
-                    <tr>
-                        <th class="columnWidth-26per" scope="col">Id</th>
-                        <th class="columnWidth-26per" scope="col">Name</th>
-                        <th class="columnWidth-26per" scope="col">Price</th>
-                        <th style="width: 60px" scope="col"></th>
-                        <th style="width: 60px" scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody id="results">
-                    @foreach (var product in Model)
-                    {
-                        <tr class="changes">
-                            <td>@product.Id</td>
-                            <td>@product.Name</td>
-                            <td>@product.Price</td>
-                            <td>
-                                <input type="button" value="Edit" class="btn btn-outline-primary btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Edit", "Product", new {id = product.Id})'" />
-                            </td>
-                            <td>
-                                <input type="button" value="Delete" class="btn btn-outline-danger btn-block btn-sm stretch" onclick="location.href = '@Url.Action("Delete", "Product", new {id = product.Id})'" />
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-<div class="col-lg-2" style="margin-left: 15px">
-    <div class="border border-dark rounded">
-        <a class="btn btn-dark btn-block" data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
-            Menu
-        </a>
-        <div class="collapse" id="collapseFilter">
-            <div style="margin: 10px">
-                <select class="custom-select mr-sm-2" id="sortOrder" onchange="OnSelectionChange(this)">
-                    <option selected value="Id">Id</option>
-                    <option value="Name">Name</option>
-                    <option value="LastName">LastName</option>
-                    <option value="MiddleName">MiddleName</option>
-                </select>
-            </div>
-            <div class="marginItem" style="margin: 10px;">
-                <div style="margin-top: 10px">
-                    <input type="button" class="btn btn-outline-secondary btn-block" value="Cancel" onclick="location.href = '@Url.Action("Index", "Home")'" />
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="border border-dark rounded col-lg-7">
+    <table class="table table-hover">
+        <thead class="thead-light ">
+            <tr>
+                <th class="columnWidth-26per" scope="col">Id</th>
+                <th class="columnWidth-26per" scope="col">Название</th>
+                <th class="columnWidth-26per" scope="col">Цена</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="results">
+            @foreach (var product in Model)
+            {
+                <tr class="changes">
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <input type="button" value="Изменить" class="btn btn-outline-primary btn-block btn-sm" onclick="location.href = '@Url.Action("Edit", "Product", new {id = product.Id})'" />
+                    </td>
+                    <td>
+                        <input type="button" value="Удалить" class="btn btn-outline-danger btn-block btn-sm" onclick="location.href = '@Url.Action("Delete", "Product", new {id = product.Id})'" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

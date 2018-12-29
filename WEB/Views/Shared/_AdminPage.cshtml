@@ -8,9 +8,10 @@
     <div class="col-md-2">
         <div class=" border border-dark rounded">
             <div class="btn-group container-fluid">
-                <button type="button" class="btn bg-white btn-block text-center" href="@Url.Action("All", "Order")">
+                <a class="btn bg-white btn-block text-center text-dark" href="@Url.Action("All", "Order")">Заказы</a>
+                @*<button type="button" class="btn bg-white btn-block text-center" onclick="href = '@Url.Action("All", "Order")'">
                     Заказы
-                </button>
+                </button>*@
             </div>
             <div class="btn-group container-fluid">
                 <button type="button" class="btn bg-white dropdown-toggle btn-block text-center" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
